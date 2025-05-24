@@ -2,12 +2,14 @@
   "name": "carbosia-site",
   "version": "0.1.0",
   "private": true,
+
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
+
   "dependencies": {
     "@contentful/rich-text-react-renderer": "16.0.1",
     "@tanstack/react-query": "^5.29.2",
@@ -17,13 +19,15 @@
     "next": "15.3.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "tailwindcss": "^3.4.17",
+    "tailwindcss": "3.4.4",
     "viem": "^2.30.1",
     "wagmi": "^2.15.4"
   },
+
   "overrides": {
     "use-sync-external-store": "^1.5.0"
   },
+
   "devDependencies": {
     "@types/node": "^20.11.25",
     "@types/react": "^19.0.40",
