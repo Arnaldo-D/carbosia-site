@@ -35,7 +35,7 @@ type BlogPostFields = {
 /** Ritorna tutti i post del blog, ordinati dal più recente */
 export async function getBlogPosts() {
   const res = await client.getEntries<BlogPostFields>({
-    content_type: "BlogPost",
+    content_type: "blogPost",
     order: "-fields.date",
   });
   return res.items;           // array di Entry<BlogPostFields>
@@ -44,7 +44,7 @@ export async function getBlogPosts() {
 /** Ritorna un singolo post dato lo slug; se non esiste → null */
 export async function getBlogPost(slug: string) {
   const res = await client.getEntries<BlogPostFields>({
-    content_type: "BlogPost",
+    content_type: "blogPost",
     "fields.slug": slug,
     limit: 1,
   });
