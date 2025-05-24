@@ -2,19 +2,16 @@
 
 import Link from 'next/link';
 import WalletButton from './WalletButton';
+import TokenBalance from './TokenBalance';
 
 /**
- * Header (fixed)
- * --------------
- * • Logo a sinistra
- * • Menu al centro
- * • WalletButton assoluto in alto a destra ⇒ non scompare più
+ * Header con saldo ITCO₂
+ * • Logo   • Menu   • WalletButton + Balance
  */
 export default function Header() {
   return (
     <header className="bg-white shadow">
-      {/* container relativo per posizionare il wallet */}
-      <div className="relative mx-auto flex max-w-5xl items-center gap-6 p-4">
+      <div className="mx-auto flex max-w-5xl items-center justify-between gap-6 p-4">
         {/* Logo */}
         <Link href="/" className="text-xl font-bold text-brand">
           Carbosia
@@ -33,9 +30,10 @@ export default function Header() {
           </Link>
         </nav>
 
-        {/* Wallet in posizione assoluta */}
-        <div className="absolute right-4 top-1/2 -translate-y-1/2">
+        {/* Wallet + Saldo */}
+        <div className="flex items-center gap-3">
           <WalletButton />
+          <TokenBalance />
         </div>
       </div>
     </header>
