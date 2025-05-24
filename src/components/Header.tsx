@@ -4,22 +4,23 @@ import Link from 'next/link';
 import WalletButton from './WalletButton';
 
 /**
- * Header
- * -------
+ * Header (fixed)
+ * --------------
  * • Logo a sinistra
  * • Menu al centro
- * • Pulsante wallet sempre visibile a destra
+ * • WalletButton assoluto in alto a destra ⇒ non scompare più
  */
 export default function Header() {
   return (
     <header className="bg-white shadow">
-      <div className="mx-auto flex max-w-5xl items-center justify-between gap-6 p-4">
+      {/* container relativo per posizionare il wallet */}
+      <div className="relative mx-auto flex max-w-5xl items-center gap-6 p-4">
         {/* Logo */}
         <Link href="/" className="text-xl font-bold text-brand">
           Carbosia
         </Link>
 
-        {/* Menu principale */}
+        {/* Menu */}
         <nav className="flex gap-4 text-sm">
           <Link href="/about" className="hover:underline">
             About
@@ -32,8 +33,10 @@ export default function Header() {
           </Link>
         </nav>
 
-        {/* Wallet */}
-        <WalletButton />
+        {/* Wallet in posizione assoluta */}
+        <div className="absolute right-4 top-1/2 -translate-y-1/2">
+          <WalletButton />
+        </div>
       </div>
     </header>
   );
