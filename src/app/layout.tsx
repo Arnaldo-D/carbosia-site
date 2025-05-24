@@ -1,4 +1,4 @@
-import { WagmiConfig } from "wagmi";
+import WagmiProviders from "@/components/WagmiProviders";
 import { wagmiConfig } from "@/lib/wagmi";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -24,9 +24,9 @@ export default function RootLayout({
   return (
     <html lang="it">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <WagmiConfig config={wagmiConfig}>
+        <WagmiProviders>
           <Layout>{children}</Layout>
-        </WagmiConfig>
+        </WagmiProviders>
       </body>
     </html>
   );
