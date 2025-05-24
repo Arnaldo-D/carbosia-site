@@ -56,7 +56,7 @@ export async function getBlogPost(slug: string) {
 type ProjectFields = {
   title: string;
   slug: string;
-  tCO₂: number;
+  tco2: number;
   pdfLink?: any;
   hero?: any;
   status: "planned" | "active" | "completed";
