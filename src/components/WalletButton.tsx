@@ -3,12 +3,22 @@
 import { useAccount, useConnect, useDisconnect } from 'wagmi';
 import { injected } from 'wagmi/connectors';
 
+/**
+ * WalletButton
+ * -------------
+ * • “Connect wallet” → apre MetaMask / Coinbase / Brave (injected)
+ * • Dopo la connessione mostra l’indirizzo abbreviato
+ * • Clic sull’indirizzo → disconnect
+ * • Gestisce lo stato “Loading…” finché wagmi non restituisce l’address
+ */
 export default function WalletButton() {
+  /* stato wagmi */
   const { address, isConnected } = useAccount();
   const { connect, isPending } = useConnect();
   const { disconnect } = useDisconnect();
 
-  if (isConnected) {
+  /* ① Connesso e address pronto */
+  if (isConnected && address) {
     return (
       <button
         onClick={() => disconnect()}
@@ -19,6 +29,19 @@ export default function WalletButton() {
     );
   }
 
+  /* ② Connesso ma wagmi non ha ancora fornito l’address */
+  if (isConnected && !address) {
+    return (
+      <button
+        disabled
+        className="rounded-lg border border-brand px-4 py-2 text-brand/60"
+      >
+        Loading…
+      </button>
+    );
+  }
+
+  /* ③ Non connesso */
   return (
     <button
       onClick={() => connect({ connector: injected() })}
