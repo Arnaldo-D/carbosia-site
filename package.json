@@ -10,8 +10,9 @@
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "16.0.1",
-    "@tanstack/react-query": "^5.29.2",
     "@tailwindcss/typography": "^0.5.13",
+    "@tanstack/react-query": "^5.29.2",
+    "contentful": "^10.15.1",
     "date-fns": "^3.6.0",
     "next": "15.3.2",
     "react": "19.1.0",
