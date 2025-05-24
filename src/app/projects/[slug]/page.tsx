@@ -10,7 +10,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
   const { title, tco2, pdfLink, hero, status, body } = project.fields as any;
 
   return (
-    <article className="prose lg:prose-lg mx-auto">
+    <article className="prose prose-slate lg:prose-lg mx-auto">
       <p className="text-sm text-gray-500 uppercase">{status}</p>
       <h1>{title}</h1>
       <p><strong>{tco2} tonnellate CO₂</strong></p>

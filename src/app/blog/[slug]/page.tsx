@@ -10,7 +10,7 @@ export default async function PostPage({ params }: { params: { slug: string } })
   const { title, body, hero, date } = post.fields as any;
 
   return (
-    <article className="prose lg:prose-lg mx-auto">
+    <article className="prose prose-slate lg:prose-lg mx-auto">
       <p className="text-sm text-gray-500">
         {new Date(date).toLocaleDateString("it-IT")}
       </p>
