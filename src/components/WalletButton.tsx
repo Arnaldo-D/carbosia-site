@@ -5,12 +5,10 @@ import { injected } from 'wagmi/connectors';
 
 export default function WalletButton() {
   const { address, isConnected } = useAccount();
-
-  // ottieni il connettore injected (MetaMask, Brave, ecc.)
-  const { connect, connectors, isPending, error } = useConnect();
+  const { connect, isPending } = useConnect();
   const { disconnect } = useDisconnect();
 
-  if (isConnected)
+  if (isConnected) {
     return (
       <button
         onClick={() => disconnect()}
@@ -19,13 +17,12 @@ export default function WalletButton() {
         {address.slice(0, 6)}…{address.slice(-4)}
       </button>
     );
-
-  const metamask = connectors.find(c => c.id === injected().id);
+  }
 
   return (
     <button
-      onClick={() => metamask && connect({ connector: metamask })}
-      disabled={!metamask || isPending}
+      onClick={() => connect({ connector: injected() })}
+      disabled={isPending}
       className="rounded-lg border border-brand px-4 py-2 text-brand hover:bg-brand/10 disabled:opacity-50"
     >
       {isPending ? 'Connecting…' : 'Connect wallet'}
