@@ -65,7 +65,7 @@ type ProjectFields = {
 /** Ritorna tutti i progetti ordinati per titolo */
 export async function getProjects() {
   const res = await client.getEntries<ProjectFields>({
-    content_type: "Project",
+    content_type: "project",
     order: "fields.title",
   });
   return res.items;           // Entry<ProjectFields>[]
@@ -74,7 +74,7 @@ export async function getProjects() {
 /** Ritorna un singolo progetto dato lo slug; se non esiste → null */
 export async function getProject(slug: string) {
   const res = await client.getEntries<ProjectFields>({
-    content_type: "Project",
+    content_type: "project",
     "fields.slug": slug,
     limit: 1,
   });
