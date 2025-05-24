@@ -7,13 +7,13 @@ export default async function ProjectPage({ params }: { params: { slug: string }
   const project = await getProject(params.slug);
   if (!project) return notFound();
 
-  const { title, tCO2, pdfLink, hero, status, body } = project.fields as any;
+  const { title, tco2, pdfLink, hero, status, body } = project.fields as any;
 
   return (
     <article className="prose lg:prose-lg mx-auto">
       <p className="text-sm text-gray-500 uppercase">{status}</p>
       <h1>{title}</h1>
-      <p><strong>{tCO2} tonnellate CO₂</strong></p>
+      <p><strong>{tco2} tonnellate CO₂</strong></p>
 
       {hero && (
         <Image

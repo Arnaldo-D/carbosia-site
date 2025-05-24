@@ -21,7 +21,7 @@ export default async function ProjectsPage() {
             </Link>
           </h2>
           <p className="text-sm text-gray-500">
-            {p.fields.tCO2} tCO2 · {p.fields.status}
+            {p.fields.tco2} tCO2 · {p.fields.status}
           </p>
         </article>
       ))}
