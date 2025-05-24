@@ -11,7 +11,7 @@ export default function Header() {
         <nav className="space-x-4">
           <Link href="/about">About</Link>
           <Link href="/blog">Blog</Link> {/* nuovo link */}
-          <Link href="/projects/sample-project">Projects</Link>
+          <Link href="/projects">Projects</Link>
         </nav>
       </div>
     </header>
