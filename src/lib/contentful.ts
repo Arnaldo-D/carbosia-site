@@ -50,3 +50,34 @@ export async function getBlogPost(slug: string) {
   });
   return res.items[0] ?? null; // Entry<BlogPostFields> | null
 }
+/* ----------------------------------------------------------------
+   3 · Project helpers
+-----------------------------------------------------------------*/
+type ProjectFields = {
+  title: string;
+  slug: string;
+  tCO₂: number;
+  pdfLink?: any;
+  hero?: any;
+  status: "planned" | "active" | "completed";
+};
+
+/** Ritorna tutti i progetti ordinati per titolo */
+export async function getProjects() {
+  const res = await client.getEntries<ProjectFields>({
+    content_type: "Project",
+    order: "fields.title",
+  });
+  return res.items;           // Entry<ProjectFields>[]
+}
+
+/** Ritorna un singolo progetto dato lo slug; se non esiste → null */
+export async function getProject(slug: string) {
+  const res = await client.getEntries<ProjectFields>({
+    content_type: "Project",
+    "fields.slug": slug,
+    limit: 1,
+  });
+  return res.items[0] ?? null; // Entry<ProjectFields> | null
+}
+
