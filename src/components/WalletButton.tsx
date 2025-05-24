@@ -6,13 +6,12 @@ import { injected } from 'wagmi/connectors';
 /**
  * WalletButton
  * -------------
- * • “Connect wallet” → apre MetaMask / Coinbase / Brave (injected)
- * • Dopo la connessione mostra l’indirizzo abbreviato
+ * • Connect → apre MetaMask / Coinbase (injected)
+ * • Dopo la connessione mostra l’indirizzo
  * • Clic sull’indirizzo → disconnect
- * • Gestisce lo stato “Loading…” finché wagmi non restituisce l’address
+ * • `flex-shrink-0` impedisce che il bottone sparisca nell’Header
  */
 export default function WalletButton() {
-  /* stato wagmi */
   const { address, isConnected } = useAccount();
   const { connect, isPending } = useConnect();
   const { disconnect } = useDisconnect();
@@ -22,19 +21,19 @@ export default function WalletButton() {
     return (
       <button
         onClick={() => disconnect()}
-        className="rounded-lg bg-brand px-4 py-2 text-white hover:bg-brand-dark"
+        className="inline-flex flex-shrink-0 items-center rounded-lg bg-brand px-4 py-2 text-white hover:bg-brand-dark"
       >
         {address.slice(0, 6)}…{address.slice(-4)}
       </button>
     );
   }
 
-  /* ② Connesso ma wagmi non ha ancora fornito l’address */
+  /* ② Connesso ma address non ancora ricevuto */
   if (isConnected && !address) {
     return (
       <button
         disabled
-        className="rounded-lg border border-brand px-4 py-2 text-brand/60"
+        className="inline-flex flex-shrink-0 items-center rounded-lg border border-brand px-4 py-2 text-brand/60"
       >
         Loading…
       </button>
@@ -46,7 +45,7 @@ export default function WalletButton() {
     <button
       onClick={() => connect({ connector: injected() })}
       disabled={isPending}
-      className="rounded-lg border border-brand px-4 py-2 text-brand hover:bg-brand/10 disabled:opacity-50"
+      className="inline-flex flex-shrink-0 items-center rounded-lg border border-brand px-4 py-2 text-brand hover:bg-brand/10 disabled:opacity-50"
     >
       {isPending ? 'Connecting…' : 'Connect wallet'}
     </button>
