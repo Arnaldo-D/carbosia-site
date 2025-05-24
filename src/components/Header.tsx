@@ -6,14 +6,14 @@ import WalletButton from './WalletButton';
 /**
  * Header
  * -------
- * • logo a sinistra
- * • menu al centro
- * • pulsante wallet a destra (sempre visibile)
+ * • Logo a sinistra
+ * • Menu al centro
+ * • Pulsante wallet sempre visibile a destra
  */
 export default function Header() {
   return (
     <header className="bg-white shadow">
-      <div className="mx-auto flex max-w-5xl items-center justify-between p-4">
+      <div className="mx-auto flex max-w-5xl items-center justify-between gap-6 p-4">
         {/* Logo */}
         <Link href="/" className="text-xl font-bold text-brand">
           Carbosia
@@ -32,7 +32,7 @@ export default function Header() {
           </Link>
         </nav>
 
-        {/* Pulsante Connect / Address */}
+        {/* Wallet */}
         <WalletButton />
       </div>
     </header>
