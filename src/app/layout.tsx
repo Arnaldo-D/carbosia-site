@@ -1,13 +1,10 @@
-'use client';
-
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 
-import WagmiProviders from '@/components/WagmiProviders';   // context per il wallet
-import Layout          from '@/components/Layout';          // Header + Footer
-import './globals.css';                                     // Tailwind
+import AppProviders from '@/components/AppProviders'; // <- wrapper client
+import './globals.css';
 
-/* ------------- font Google ----------------------------- */
+/*-------- font Google --------*/
 const geistSans = Geist({  variable: '--font-geist-sans',  subsets: ['latin'] });
 const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin'] });
 
@@ -20,9 +17,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="it">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <WagmiProviders>
-          <Layout>{children}</Layout>
-        </WagmiProviders>
+        {/* Tutti i componenti client-side sono incapsulati qui */}
+        <AppProviders>{children}</AppProviders>
       </body>
     </html>
   );
