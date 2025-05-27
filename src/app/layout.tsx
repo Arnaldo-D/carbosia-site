@@ -1,3 +1,4 @@
+import Layout from '@/components/Layout';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 
@@ -16,9 +17,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="it">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {/* Tutti i componenti client-side sono incapsulati qui */}
-        <AppProviders>{children}</AppProviders>
+        <AppProviders>
+          <Layout>{children}</Layout>   {/* <<< usa il Layout appena creato */}
+        </AppProviders>
       </body>
     </html>
   );
