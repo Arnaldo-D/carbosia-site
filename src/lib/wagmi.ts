@@ -1,16 +1,17 @@
 'use client';
 
 import { getDefaultWallets, connectorsForWallets } from '@rainbow-me/rainbowkit';
-import { createConfig, http } from 'wagmi';
+import { createConfig } from 'wagmi';
+import { http } from 'viem';             //  ←  viene da *viem*
 import { polygonMumbai } from 'wagmi/chains';
 
-/* ---------- chain usata (test-net ufficiale di Polygon) ---------- */
+/* ---------- chain ---------- */
 export const chains = [polygonMumbai];
 
-/* ---------- WalletConnect project-id ---------- */
+/* ---------- WalletConnect ---------- */
 const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_ID as string;
 
-/* ---------- wallet list & connectors ---------- */
+/* ---------- connectors ---------- */
 const { wallets } = getDefaultWallets({
   appName: 'Carbosia',
   projectId,
@@ -24,6 +25,6 @@ export const wagmiConfig = createConfig({
   chains,
   connectors,
   transports: {
-    [polygonMumbai.id]: http(), // RPC pubblica di default
+    [polygonMumbai.id]: http(),   // RPC pubblica di default
   },
 });

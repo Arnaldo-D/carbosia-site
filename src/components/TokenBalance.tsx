@@ -1,7 +1,7 @@
 'use client';
 
 import { useAccount, useContractRead } from 'wagmi';
-import { polygonAmoy } from '@/lib/wagmi';
+import { polygonMumbai, wagmiConfig } from '@/lib/wagmi';
 import ABI from '@/lib/abi/PolygonAmoyToken.json';
 
 const TOKEN_ADDRESS = '0xAbCd...';
