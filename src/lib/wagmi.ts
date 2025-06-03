@@ -1,35 +1,32 @@
-/* src/lib/wagmi.ts */
-import { http, createConfig }      from 'wagmi';
-import { defineChain }             from 'wagmi/chains';
-import { getDefaultWallets }       from '@rainbow-me/rainbowkit';
-import { createPublicClient }      from 'viem';
+// src/lib/wagmi.ts
+import { WagmiConfig, configureChains, createConfig } from 'wagmi';
+import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
+import { polygon, polygonMumbai } from 'wagmi/chains';   // catena prod/test “pronte”
 
-/* --------- chain Polygon Amoy (80002) --------- */
-export const polygonAmoy = defineChain({
-  id:       80_002,
-  name:     'Polygon Amoy',
+// ---- se vuoi Amoy devi descriverla a mano --------------
+export const polygonAmoy = {
+  id:        80002,
+  name:      'Polygon Amoy',
+  network:   'amoy',
   nativeCurrency: { name: 'MATIC', symbol: 'MATIC', decimals: 18 },
-  rpcUrls: {
-    default: { http: ['https://rpc-amoy.polygon.technology'] },
-    public:  { http: ['https://rpc-amoy.polygon.technology'] },
-  },
-  blockExplorers: {
-    default: { name: 'AmoyScan', url: 'https://www.oklink.com/amoy' },
-  },
-});
+  rpcUrls:   { default: { http: ['https://rpc-amoy.polygon.technology'] } },
+  blockExplorers: { default: { name: 'Polygonscan', url: 'https://www.oklink.com/amoy' } },
+  testnet:   true,
+} as const;
+// ---------------------------------------------------------
 
-/* --------- RainbowKit / wagmi config ---------- */
-const { wallets, connectors } = getDefaultWallets({
-  appName:  'Carbosia',
-  projectId: 'YOUR_WALLETCONNECT_PROJECT_ID',   // ← se non l’hai ancora, lascialo così
-  chains:    [polygonAmoy],
-});
+/* ----- scegli le chain che vuoi supportare ---------- */
+const { chains, publicClient } = configureChains(
+  [polygonAmoy /* , polygon, polygonMumbai */],
+  [
+    jsonRpcProvider({
+      rpc: chain => ({ http: chain.rpcUrls.default.http[0] }),
+    }),
+  ],
+);
 
 export const wagmiConfig = createConfig({
-  connectors,
-  chains: [polygonAmoy],
-  publicClient: createPublicClient({
-    chain: polygonAmoy,
-    transport: http(),
-  }),
+  autoConnect: true,
+  publicClient,
+  chains,
 });

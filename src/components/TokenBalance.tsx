@@ -1,20 +1,25 @@
 'use client';
 
-import { useContractRead } from 'wagmi';
-import { formatUnits } from 'viem';
-import { wagmiConfig } from '@/lib/wagmi';
-import { polygonAmoyAbi } from '@/lib/abi/PolygonAmoyToken'; //  <-- se non hai l’ABI, commenta le 3 righe “abi” e “functionName”!
+import { useAccount, useContractRead } from 'wagmi';
+import { polygonAmoy } from '@/lib/wagmi';
+import ABI from '@/lib/abi/PolygonAmoyToken.json';
+
+const TOKEN_ADDRESS = '0xAbCd...';
 
 export default function TokenBalance() {
-  const { data, isLoading } = useContractRead({
-    config: wagmiConfig,
-    abi: polygonAmoyAbi,
-    address: '0xYourTokenAddress',
+  const { address } = useAccount();
+
+  const { data } = useContractRead({
+    address: TOKEN_ADDRESS,
+    abi: ABI,
     functionName: 'balanceOf',
-    args: ['0xYourWalletAddress'],
+    args: address ? [address] : undefined,
+    enabled: !!address,
+    chainId: polygonAmoy.id,
   });
 
-  if (isLoading) return <span className="text-xs text-gray-500">Loading…</span>;
-  const balance = data ? formatUnits(data as bigint, 18) : '0';
-  return <span className="text-sm font-mono">{balance} ITCO₂</span>;
+  if (!address) return null;
+  if (!data)    return <span>loading…</span>;
+
+  return <span>{Number(data) / 1e18} ITCO₂</span>;
 }
