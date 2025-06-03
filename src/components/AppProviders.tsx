@@ -1,17 +1,17 @@
 'use client';
 
-import { ReactNode } from 'react';
-import WagmiProviders from '@/components/WagmiProviders';
-import Layout from '@/components/Layout';
+import '@rainbow-me/rainbowkit/styles.css';
+import { WagmiConfig }      from 'wagmi';
+import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import { wagmiConfig, polygonAmoy } from '@/lib/wagmi';
+import Layout               from '@/components/Layout';
 
-/**
- * Incapsula tutti i provider “client-side” (wagmi, ecc.)
- * e racchiude il contenuto nell’UI di base (Header/Footer).
- */
-export default function AppProviders({ children }: { children: ReactNode }) {
+export default function AppProviders({ children }: { children: React.ReactNode }) {
   return (
-    <WagmiProviders>
-      <Layout>{children}</Layout>
-    </WagmiProviders>
+    <WagmiConfig config={wagmiConfig}>
+      <RainbowKitProvider chains={[polygonAmoy]}>
+        <Layout>{children}</Layout>
+      </RainbowKitProvider>
+    </WagmiConfig>
   );
 }
