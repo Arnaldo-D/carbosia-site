@@ -28,3 +28,4 @@ export const wagmiConfig = createConfig({
     [polygonMumbai.id]: http(),   // RPC pubblica di default
   },
 });
+export { polygonAmoy };
