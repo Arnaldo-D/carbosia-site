@@ -1,14 +1,17 @@
 'use client';
 
-import { WagmiConfig } from 'wagmi';
-import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
-import { wagmiConfig } from '@/lib/wagmi';
+import { WagmiConfig }            from 'wagmi';
+import { RainbowKitProvider }     from '@rainbow-me/rainbowkit';
+import { wagmiConfig, chains }    from '@/lib/wagmi';
 
-export default function WagmiProviders({ children }: { children: React.ReactNode }) {
+export default function WagmiProviders({
+  children,
+}: { children: React.ReactNode }) {
   return (
     <WagmiConfig config={wagmiConfig}>
-      {/* RainbowKit legge le chain direttamente dal config */}
-      <RainbowKitProvider>{children}</RainbowKitProvider>
+      <RainbowKitProvider chains={chains} modalSize="compact">
+        {children}
+      </RainbowKitProvider>
     </WagmiConfig>
   );
 }
