@@ -16,7 +16,7 @@ export default function TokenBalance() {
     functionName: 'balanceOf',
     args:         address ? [address] : undefined,
     enabled:      !!address,
-    chainId:      polygonMumbai.id,
+    chainId: polygonAmoy.id,
   });
 
   if (!address)     return null;
