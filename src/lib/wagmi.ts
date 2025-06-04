@@ -1,11 +1,11 @@
-import { polygonAmoy } from 'wagmi/chains';
-import { http } from 'wagmi';
-
-export const chains = [polygonAmoy];
+// src/lib/wagmi.ts
+import { createConfig, http } from "wagmi";
+import { polygonAmoy } from "wagmi/chains";
 
 export const wagmiConfig = createConfig({
-  chains,
+  chains: [polygonAmoy],
   transports: {
-    [polygonAmoy.id]: http('https://rpc-amoy.polygon.technology'),
+    [polygonAmoy.id]: http(),          // oppure http("https://rpc-amoy.polygon.technology")
   },
+  ssr: true,                           // evita mismatch tra server/client
 });
