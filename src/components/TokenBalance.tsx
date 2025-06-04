@@ -1,26 +1,27 @@
+// src/components/TokenBalance.tsx
 'use client';
 
-import { useAccount, useReadContract } from 'wagmi';
-import { polygonMumbai }              from 'wagmi/chains';   // ✅ catena Amoy già inclusa in wagmi v1
-import ABI                            from '@/lib/abi/PolygonAmoyToken.json';
+import { useAccount, useContractRead } from 'wagmi';
+import { polygonMumbai }               from 'wagmi/chains';
+import ABI                              from '@/lib/abi/PolygonAmoyToken.json'; // ok anche se il nome del file resta
 
-const TOKEN_ADDRESS = '0xAbCd...';    // lascia o aggiorna con l’address corretto
+const TOKEN_ADDRESS = '0xAbCd...'; // <-- metti l’indirizzo corretto
 
 export default function TokenBalance() {
   const { address } = useAccount();
 
-  /* balanceOf(address) -> uint256 */
-  const { data, isLoading } = useReadContract({
-    address: TOKEN_ADDRESS as `0x${string}`,
-    abi:      ABI,
+  const { data, isLoading } = useContractRead({
+    address:      TOKEN_ADDRESS,
+    abi:          ABI,
     functionName: 'balanceOf',
-    args:     address ? [address] : undefined,
-    chainId:  polygonMumbai.id,
-    query:    { enabled: !!address },
+    args:         address ? [address] : undefined,
+    enabled:      !!address,
+    chainId:      polygonMumbai.id,
   });
 
-  if (!address)   return null;              // wallet non connesso
-  if (isLoading)  return <span>loading…</span>;
+  if (!address)     return null;
+  if (isLoading)    return <span>loading…</span>;
+  if (!data)        return <span>0 ITCO₂</span>;
 
   return <span>{Number(data) / 1e18} ITCO₂</span>;
 }

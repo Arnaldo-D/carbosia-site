@@ -1,28 +1,30 @@
 // src/lib/wagmi.ts
-import { http, createConfig }                 from 'wagmi';
-import { polygonAmoy }                        from 'wagmi/chains';
-import { getDefaultWallets, connectorsForWallets }
-                                             from '@rainbow-me/rainbowkit';
-import { publicProvider }                     from 'wagmi/providers/public';
+import { configureChains, createConfig } from 'wagmi';
+import { polygonMumbai }                 from 'wagmi/chains';
+import { publicProvider }                from 'wagmi/providers/public';
 
-/* ---------- chains attive ---------- */
-export const chains = [polygonAmoy];
+import {
+  connectorsForWallets,
+  getDefaultWallets,
+} from '@rainbow-me/rainbowkit';
 
-/* ---------- WalletConnect project ID ---------- */
+/* ---------- chains & provider ---------- */
+export const { chains, publicClient } = configureChains(
+  [polygonMumbai],
+  [publicProvider()],
+);
+
+/* ---------- connectors ---------- */
 const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_ID as string;
 
-/* ---------- connettori RainbowKit ---------- */
 const { wallets } = getDefaultWallets({
   appName: 'Carbosia',
   projectId,
   chains,
 });
 
-export const connectors = connectorsForWallets([...wallets]);
-
-/* ---------- wagmi config ---------- */
 export const wagmiConfig = createConfig({
-  connectors,
-  chains,
-  transports: { [polygonAmoy.id]: http() },
+  autoConnect: true,
+  connectors:  connectorsForWallets([...wallets]),
+  publicClient,
 });
