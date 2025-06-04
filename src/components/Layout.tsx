@@ -1,21 +1,15 @@
-'use client';                                   // <-- deve essere client
+import { ReactNode } from "react";
+import Header from "./Header";
+import Footer from "./Footer";
 
-import Header from '@/components/Header';       // menu + wallet button
-import Footer from '@/components/Footer';       // se hai un footer; altrimenti rimuovi questa riga
-
-export default function Layout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <>
+    <div className="flex min-h-screen flex-col font-sans bg-white">
       <Header />
-
-      {/* contenuto pagina */}
-      <main className="mx-auto max-w-3xl px-6 py-16">{children}</main>
-
-      {/* <Footer /> se esiste */}
-    </>
+      <main className="flex-1 mx-auto w-full max-w-4xl px-6 py-10">
+        {children}
+      </main>
+      <Footer />
+    </div>
   );
 }
