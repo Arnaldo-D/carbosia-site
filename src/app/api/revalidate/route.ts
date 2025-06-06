@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 
 export async function POST(req: NextRequest) {
   const secret = req.nextUrl.searchParams.get("secret");
@@ -9,7 +10,7 @@ export async function POST(req: NextRequest) {
   const { path } = await req.json();          // es.: "/blog/welcome"
   try {
     // Next.js 15 revalidate tag-free:
-    await res.revalidate(path);
+    await revalidatePath(path);
     return NextResponse.json({ revalidated: true, path });
   } catch (err) {
     return NextResponse.json({ error: (err as Error).message }, { status: 500 });
