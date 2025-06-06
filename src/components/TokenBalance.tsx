@@ -2,7 +2,7 @@
 'use client';
 
 import { useAccount, useContractRead } from 'wagmi';
-import { polygonMumbai }               from 'wagmi/chains';
+import { polygonAmoy }                 from 'wagmi/chains';
 import ABI                              from '@/lib/abi/PolygonAmoyToken.json'; // ok anche se il nome del file resta
 
 const TOKEN_ADDRESS = '0xAbCd...'; // <-- metti l’indirizzo corretto
