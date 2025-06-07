@@ -1,6 +1,12 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ['./src/**/*.{ts,tsx}'],
+import type { Config } from 'tailwindcss'
+import typography from '@tailwindcss/typography'
+
+const config: Config = {
+  content: [
+    './src/**/*.{ts,tsx}',
+    './src/app/**/*.{ts,tsx}',
+    './src/components/**/*.{ts,tsx}',
+  ],
 
   // === 1 · safelist =========================================
   // Impedisce a Tailwind di eliminare le utility di colore brand
@@ -27,5 +33,7 @@ module.exports = {
   },
 
   // === 3 · plugin Typography ================================
-  plugins: [require('@tailwindcss/typography')],
-};
+  plugins: [typography],
+}
+
+export default config
