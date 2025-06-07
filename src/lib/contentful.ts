@@ -3,9 +3,9 @@ import { createClient, Entry } from "contentful";
 /* ----------------------------------------------------------------
    Configurazione client Contentful (usa le variabili d’ambiente)
 -----------------------------------------------------------------*/
-const space  = process.env.CF_SPACE_ID!;
-const token  = process.env.CF_CDA_TOKEN || process.env.CF_CMA_TOKEN!;
-const client = createClient({ space, accessToken: token });
+const space  = process.env.CF_SPACE_ID || "";
+const token  = process.env.CF_CDA_TOKEN || process.env.CF_CMA_TOKEN || "";
+const client = space && token ? createClient({ space, accessToken: token }) : null;
 
 /* ----------------------------------------------------------------
    1 · Pagina generica (Home, About, ecc.)
@@ -13,6 +13,7 @@ const client = createClient({ space, accessToken: token });
 type PageFields = { title: string; body: any };
 
 export async function getPage(slug: string) {
+  if (!client) return undefined;
   const res = await client.getEntries<PageFields>({
     content_type: "page",
     "fields.slug": slug,
@@ -34,6 +35,7 @@ type BlogPostFields = {
 
 /** Ritorna tutti i post del blog, ordinati dal più recente */
 export async function getBlogPosts() {
+  if (!client) return [];
   const res = await client.getEntries<BlogPostFields>({
     content_type: "blogPost",
     order: "-fields.date",
@@ -43,6 +45,7 @@ export async function getBlogPosts() {
 
 /** Ritorna un singolo post dato lo slug; se non esiste → null */
 export async function getBlogPost(slug: string) {
+  if (!client) return null;
   const res = await client.getEntries<BlogPostFields>({
     content_type: "blogPost",
     "fields.slug": slug,
@@ -64,6 +67,7 @@ type ProjectFields = {
 
 /** Ritorna tutti i progetti ordinati per titolo */
 export async function getProjects() {
+  if (!client) return [];
   const res = await client.getEntries<ProjectFields>({
     content_type: "project",
     order: "fields.title",
@@ -73,6 +77,7 @@ export async function getProjects() {
 
 /** Ritorna un singolo progetto dato lo slug; se non esiste → null */
 export async function getProject(slug: string) {
+  if (!client) return null;
   const res = await client.getEntries<ProjectFields>({
     content_type: "project",
     "fields.slug": slug,
