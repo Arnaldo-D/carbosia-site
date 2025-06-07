@@ -1,5 +1,7 @@
 "use client";
 
+import "./globals.css";
+
 import { ReactNode } from "react";
 import Layout from "@/components/Layout";
 import AppProviders from "@/components/AppProviders";
