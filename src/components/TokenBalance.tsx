@@ -2,7 +2,7 @@
 'use client';
 
 import { useAccount, useContractRead } from 'wagmi';
-import { polygonMumbai }               from 'wagmi/chains';
+import { polygonAmoy }               from 'wagmi/chains';
 import ABI                              from '@/lib/abi/PolygonAmoyToken.json'; // ok anche se il nome del file resta
 
 const TOKEN_ADDRESS = '0xAbCd...'; // <-- metti l’indirizzo corretto
@@ -16,7 +16,7 @@ export default function TokenBalance() {
     functionName: 'balanceOf',
     args:         address ? [address] : undefined,
     enabled:      !!address,
-    chainId: polygonMumbai.id,
+    chainId: polygonAmoy.id,
   });
 
   if (!address)     return null;
