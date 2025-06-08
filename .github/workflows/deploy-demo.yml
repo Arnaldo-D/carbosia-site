@@ -10,9 +10,21 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Check secrets
+        run: |
+          for var in PRIVATE_KEY ALCHEMY_AMOY ALCHEMY_POLYGON; do
+            if [ -z "${!var}" ]; then
+              echo "::error::$var is not set"; exit 1; fi
+          done
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: 20 }
+        with:
+          node-version: 20
+          cache: pnpm
+      - name: Enable pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@latest --activate
       - run: pnpm install
       - run: pnpm hardhat compile
       - run: |
