@@ -22,7 +22,7 @@ jobs:
           node-version: 20
           cache: pnpm
       - name: Install pnpm
-        run: npm install -g pnpm
+        run: npm install -g pnpm@latest
       - name: Enable pnpm
         run: |
           corepack enable
