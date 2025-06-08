@@ -56,3 +56,10 @@ Deploy to Polygon:
 ```bash
 pnpm deploy:polygon
 ```
+
+## Deploy DEMO-ITCO₂ via GitHub Action
+
+Use the **Deploy DEMO-ITCO2** workflow available in the repository actions tab.
+Choose the target network (`amoy` or `polygon`) and run the workflow to deploy
+the smart contract and automatically update `docs/mint-demo.md` with the
+address and transaction hash.
