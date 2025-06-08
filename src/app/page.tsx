@@ -1,25 +1,14 @@
-import { getPage } from '@/lib/contentful';
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-
-export default async function HomePage() {
-  // recupera l’entry con slug “home”
-  const data = await getPage('home');
-
-  if (!data) {
-    return (
-      <main className="p-10 text-center">
-        Contenuto non trovato.
-      </main>
-    );
-  }
-
+export default function HomePage() {
   return (
-    <main className="mx-auto max-w-4xl px-6 py-16">
-      <h1 className="mb-8 text-4xl font-bold">{data.title}</h1>
-
-      <article className="prose prose-green">
-        {documentToReactComponents(data.body as any)}
-      </article>
-    </main>
+    <section className="mx-auto flex max-w-5xl flex-col items-center gap-6 py-20 text-center">
+      <h1 className="text-5xl font-bold">Carbosia</h1>
+      <p className="text-xl text-gray-600">Il marketplace per la compensazione di CO₂</p>
+      <a
+        href="/projects"
+        className="rounded-xl bg-brand px-6 py-3 font-semibold text-white hover:bg-brand-dark"
+      >
+        Entra in Carbosia
+      </a>
+    </section>
   );
 }
