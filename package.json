@@ -7,10 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "deploy:amoy": "hardhat run smart-contract/scripts/deploy.ts --network amoy",
+    "deploy:polygon": "hardhat run smart-contract/scripts/deploy.ts --network polygon"
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "16.0.1",
+    "@openzeppelin/contracts": "^5.0.1",
     "@rainbow-me/rainbowkit": "^2.2.5",
     "@tailwindcss/typography": "0.5.16",
     "@tanstack/react-query": "^5.0.0",
@@ -30,16 +33,19 @@
     "use-sync-external-store": "1.5.0"
   },
   "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "@testing-library/react": "^16.3.0",
     "@types/node": "^20.11.25",
     "@types/react": "^19.0.40",
     "@types/react-dom": "^19.0.18",
+    "dotenv": "^16.5.0",
     "eslint": "^8.57.0",
     "eslint-config-next": "15.3.2",
+    "hardhat": "^2.24.2",
+    "jsdom": "^26.1.0",
     "pino-pretty": "^9.2.0",
     "postcss-loader": "^7.3.3",
     "typescript": "^5.4.5",
-    "vitest": "^3.2.2",
-    "@testing-library/react": "^16.3.0",
-    "jsdom": "^26.1.0"
+    "vitest": "^3.2.2"
   }
 }
