@@ -9,7 +9,8 @@
     "lint": "next lint",
     "test": "vitest run",
     "deploy:amoy": "hardhat run smart-contract/scripts/deploy.ts --network amoy",
-    "deploy:polygon": "hardhat run smart-contract/scripts/deploy.ts --network polygon"
+    "deploy:polygon": "hardhat run smart-contract/scripts/deploy.ts --network polygon",
+    "deploy:json": "hardhat run smart-contract/scripts/deploy-json.ts --network polygon"
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "16.0.1",

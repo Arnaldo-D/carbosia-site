@@ -1,0 +1,34 @@
+name: Deploy DEMO-ITCO2
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "Network to deploy (amoy | polygon)"
+        required: true
+        default: "amoy"
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: pnpm install
+      - run: pnpm hardhat compile
+      - run: |
+          pnpm hardhat run smart-contract/scripts/deploy-json.ts --network ${{ github.event.inputs.target }} > deploy.json
+      - run: |
+          ADDR=$(jq -r '.address' deploy.json)
+          TX=$(jq -r '.tx' deploy.json)
+          DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          echo -e "Contract address: $ADDR\nDeploy tx-hash : $TX\nDate           : $DATE" > docs/mint-demo.md
+      - run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add docs/mint-demo.md
+          git commit -m "docs: update mint-demo log" || echo "no changes"
+          git push
+    env:
+      PRIVATE_KEY:  ${{ secrets.PRIVATE_KEY }}
+      ALCHEMY_AMOY: ${{ secrets.ALCHEMY_AMOY }}
+      ALCHEMY_POLYGON: ${{ secrets.ALCHEMY_POLYGON }}
