@@ -34,3 +34,25 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Smart contract deployment
+
+Create a `.env` file based on `.env.example` and provide your `PRIVATE_KEY` and
+Alchemy endpoints for Amoy and Polygon. Then run:
+
+```bash
+pnpm install
+pnpm hardhat compile
+```
+
+Deploy to Amoy:
+
+```bash
+pnpm deploy:amoy
+```
+
+Deploy to Polygon:
+
+```bash
+pnpm deploy:polygon
+```
