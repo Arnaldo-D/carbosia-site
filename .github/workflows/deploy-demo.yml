@@ -21,10 +21,10 @@ jobs:
         with:
           node-version: 20
           cache: pnpm
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 9
+      - name: Install pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@9 --activate
       - run: pnpm --version
       - run: pnpm install
       - run: pnpm hardhat compile
