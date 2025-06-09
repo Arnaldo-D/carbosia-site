@@ -1,5 +1,8 @@
 name: Deploy DEMO-ITCO2
 on:
+  push:
+    branches:
+      - fix/ci-pnpm
   workflow_dispatch:
     inputs:
       target:
@@ -25,7 +28,8 @@ jobs:
         run: |
           corepack enable
           corepack prepare pnpm@9 --activate
-      - run: pnpm --version
+      - name: Sanity check pnpm
+        run: pnpm --version
       - run: pnpm install
       - run: pnpm hardhat compile
       - run: |
