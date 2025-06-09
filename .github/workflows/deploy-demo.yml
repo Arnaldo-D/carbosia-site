@@ -25,12 +25,7 @@ jobs:
         uses: pnpm/action-setup@v2
         with:
           version: 9
-      - name: Install pnpm
-        run: npm install -g pnpm@latest
-      - name: Enable pnpm
-        run: |
-          corepack enable
-          corepack prepare pnpm@latest --activate
+      - run: pnpm --version
       - run: pnpm install
       - run: pnpm hardhat compile
       - run: |
