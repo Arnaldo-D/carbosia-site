@@ -24,10 +24,10 @@ jobs:
         with:
           node-version: 20
           cache: pnpm
-      - name: Install pnpm
-        run: |
-          corepack enable
-          corepack prepare pnpm@9 --activate
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 9
+          run_install: false
       - name: Sanity check pnpm
         run: pnpm --version
       - run: pnpm install
